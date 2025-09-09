@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns:th="http:www.thymeleaf.org">
+<head>
+  <link rel="stylesheet" th:href="@{/css/Home.css}">
+    <title>Title</title>
+  <style>
+    .slide-up {
+        opacity: 0;
+        transform: translateY(40px);
+        animation: slideUp 0.8s ease-out forwards;
+      }
+
+      @keyframes slideUp {
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+  </style>
+</head>
+<body>
+<header class="navbar">
+  <div class="logo">Knit<span>Wayzz</span></div>
+</header>
+
+<section class="why slide-up">
+  <h2>Terms of Use</h2>
+  <div style="max-width:700px; margin:auto; text-align:left; font-size:16px; line-height:1.7;">
+    <p><strong>1. Acceptance of Terms:</strong> By using KnitWayzz, you agree to our terms and conditions.</p>
+    <p><strong>2. Eligibility:</strong> Only verified university students are allowed to use this platform.</p>
+    <p><strong>3. Conduct:</strong> Users are expected to behave respectfully and responsibly when interacting with others.</p>
+    <p><strong>4. Data Use:</strong> You permit us to store your information securely to improve your experience.</p>
+    <p><strong>5. Modification:</strong> KnitWayzz reserves the right to update these terms at any time.</p>
+  </div>
+</section>
+
+<footer>
+  <p style="text-align:center;">&copy; 2025 Knit<span>Wayzz</span> | Terms of Use</p>
+</footer>
+
+</body>
+</html>

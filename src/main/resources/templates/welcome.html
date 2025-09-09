@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Welcome to KnitWayzz</title>
+  <style>
+    body { font-family: 'Segoe UI', sans-serif; background: #f0f2f5; padding: 0; margin: 0;}
+    .container { max-width: 520px; margin: 55px auto; background: #fff; border-radius: 16px; box-shadow: 0 2px 12px rgba(0,0,0,0.09); padding: 36px 36px 30px 36px; }
+    h1 { color: #23423e; font-size: 2.2rem; text-align: center; margin-bottom: 16px;}
+    .intro { text-align: center; color: #6b6b6b; font-size: 1.13rem; margin-bottom: 27px;}
+    .action-btns { display: flex; flex-direction: column; gap: 15px; margin-bottom: 18px;}
+    .action-btns button { padding: 15px 0; font-size: 1.13rem; font-weight: 600; border-radius: 7px; border: none; cursor: pointer; transition: background 0.18s;}
+    .find-btn { background: #fc8356; color: #fff; }
+    .find-btn:hover { background: #e07638; }
+    .post-btn { background: #ffe5d0; color: #23423e; border: 2px solid #fc8356;}
+    .post-btn:hover { background: #f7e0cd;}
+    .note { font-size: .98rem; color: #555; text-align: center; margin-top: 12px;}
+  </style>
+
+</head>
+<body>
+<div class="container">
+  <h1>Welcome to KnitWayzz!</h1>
+  <div class="intro">
+    Start your journey – find a ride, connect with a buddy, or post your own ride plan.<br>
+    <br>
+    Join hundreds of college friends making traveling easier, safer, and more fun.
+  </div>
+  <div class="action-btns">
+    <button class="find-btn" onclick="handleStart('buddy')">Find a Ride</button>
+    <button class="post-btn" onclick="handleStart('post')">Post a Ride</button>
+    <button class="find-btn" onclick="handleStart('my')">My rides</button>
+  </div>
+  <div class="note">
+    Need help? Check our <a href="faq" style="text-decoration:none;">FAQ</a> or contact support anytime.
+  </div>
+</div>
+<script>
+  sessionStorage.setItem("loggedIn", "true");
+
+  function isAuthenticated() {
+    return sessionStorage.getItem("loggedIn") === "true";
+  }
+
+  function handleStart(action) {
+    if (!isAuthenticated()) {
+      requireLoginFeature(action === 'buddy' ? "Find a Ride" : "Post a Ride");
+      return false;
+    }
+    if (action === 'buddy') window.location.href = '/find_ride';
+    else if (action === 'post') window.location.href = '/post_ride';
+    else if(action === 'my') window.location.href= '/my_rides';
+    return false;
+  }
+</script>
+
+
+</body>
+</html>

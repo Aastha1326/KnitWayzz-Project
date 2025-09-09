@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Find a Campus Ride | KnitWayzz</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            background: #f0f2f5;
+            margin: 0;
+            padding: 0;
+        }
+        .navbar {
+            background: #ffe5d0;
+            padding: 20px 0 12px 0;
+            box-shadow: 0px 2px 8px rgba(0,0,0,0.05);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .navbar .logo {
+            font-size: 2rem;
+            font-weight: bold;
+            margin-right: 50px;
+            letter-spacing: 1px;
+            color: #fc8356;
+        }
+        .navbar nav a {
+            text-decoration: none;
+            color: #23423e;
+            font-weight: 600;
+            margin: 0 25px;
+            font-size: 1.1rem;
+            transition: color 0.2s;
+        }
+        .navbar nav a:hover {
+            color: #fc8356;
+        }
+        .container {
+            max-width: 650px;
+            background: #fff;
+            margin: 36px auto;
+            padding: 30px 32px 22px 32px;
+            border-radius: 18px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.10);
+        }
+        h1 {
+            text-align: center;
+            color: #23423e;
+            font-size: 2.6rem;
+            letter-spacing: 1px;
+            margin-bottom: 12px;
+        }
+        .desc {
+            text-align: center;
+            color: #444e51;
+            font-size: 1.03rem;
+            margin-bottom: 28px;
+        }
+        .ride-form {
+            background: #fde8d6;
+            border-radius: 15px;
+            padding: 24px 18px 12px 18px;
+            margin-bottom: 8px;
+        }
+        .form-group {
+            margin-bottom: 13px;
+        }
+        label {
+            font-weight: 600;
+            color: #23423e;
+            display: block;
+            margin-bottom: 5px;
+            font-size: 1.01rem;
+        }
+        input[type="text"],
+        input[type="date"],
+        input[type="number"],
+        input[type="time"] {
+            width: 100%;
+            padding: 9px 12px;
+            border: 1px solid #e1b697;
+            border-radius: 8px;
+            font-size: 1rem;
+            background: white;
+            margin-bottom: 0px;
+        }
+        input[type="range"] {
+            width: 150px;
+            vertical-align: middle;
+        }
+        textarea {
+            width: 100%;
+            border-radius: 8px;
+            font-size: 1rem;
+            padding: 10px;
+            border: 1px solid #e1b697;
+        }
+        .row {
+            display: flex;
+            gap: 18px;
+        }
+        .row .form-group {
+            flex: 1;
+        }
+        .slider-label {
+            display: inline-block;
+            margin-left: 12px;
+            color: #787878;
+        }
+        .form-bottom-row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 10px;
+            margin-top: 18px;
+        }
+        .form-bottom-row label {
+            margin: 0 0 0 6px;
+            font-size: 0.98rem;
+            font-weight: 400;
+            color: #556;
+        }
+        .primary-btn, .secondary-btn {
+            border: none;
+            border-radius: 8px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            padding: 12px 34px;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+        .primary-btn {
+            background: #fc8356;
+            color: #fff;
+            margin-right: 8px;
+        }
+        .primary-btn:hover {
+            background: #d37246;
+        }
+        .secondary-btn {
+            background: #909497;
+            color: #fff;
+        }
+        .secondary-btn:hover {
+            background: #6e7478;
+        }
+        @media (max-width: 700px) {
+            .container {
+                padding: 8px;
+            }
+            .navbar .logo { font-size:1.2rem; }
+            .navbar nav a { margin:0 10px;}
+        }
+    </style>
+</head>
+<body>
+<!-- Navbar -->
+<header class="navbar">
+    <div class="logo">KnitWayzz</div>
+    <nav>
+        <a th:href="@{/}">Home</a>
+        <a th:href="@{/find_ride}">Find a Buddy</a>
+        <a th:href="@{/my_rides}">My Rides</a>
+    </nav>
+</header>
+
+<div class="container">
+    <h1>Post a Campus Ride</h1>
+    <div class="desc">
+        Looking for a ride to or from campus? Use the filters below to post rides that match your needs.
+    </div>
+    <form class="ride-form" th:action="@{/post_ride}" th:object="${rideSearch}"  method="post">
+        <div class="form-group">
+            <label>From (Origin):</label>
+            <input th:field="*{source}" type="text" placeholder="e.g., Your location, Hostel Block B" required />
+        </div>
+
+        <div class="form-group">
+            <label>To (Destination):</label>
+            <input th:field="*{destination}" type="text" placeholder="e.g., Main Campus Gate, University Canteen" required />
+        </div>
+
+        <div class="form-group">
+            <label>Mobile Number:</label>
+            <input th:field="*{mobileNo}" type="text" placeholder="Enter mobile number" required />
+        </div>
+        <div class="form-group">
+            <label>Select Vehicle:</label>
+            <select th:field="*{vehicle}" required>
+                <option value="" disabled selected>Select vehicle</option>
+                <option value="Car">Car</option>
+                <option value="Bus">Bus</option>
+                <option value="Train">Train</option>
+                <option value="Bike">Bike</option>
+                <option value="Auto">Auto</option>
+            </select>
+        </div>
+
+        <div class="row">
+            <div class="form-group">
+                <label>Date:</label>
+                <input th:field="*{date}" type="date" required />
+            </div>
+            <div class="form-group">
+                <label>Passengers:</label>
+                <input th:field="*{passengers}" type="number" min="1" value="1" required />
+            </div>
+        </div>
+        <div class="row">
+            <div class="form-group">
+                <label>Time From:</label>
+                <input th:field="*{timeFrom}" type="time" />
+            </div>
+            <div class="form-group">
+                <label>Time To:</label>
+                <input th:field="*{timeTo}" type="time" />
+            </div>
+        </div>
+        <div class="form-group">
+            <label>Any notes about ride:</label>
+            <textarea th:field="*{notes}" rows="2" placeholder="Anything special (optional)"></textarea>
+        </div>
+        <div class="form-group form-bottom-row">
+            <div>
+                <label>Max Contribution (₹):</label>
+                <input th:field="*{maxContribution}" type="range" min="0" max="1000" class="slider"/>
+                <span class="slider-label" th:text="*{maxContribution != null ? maxContribution : 'Any'}"></span>
+            </div>
+
+
+            <div>
+                <button type="submit" class="primary-btn">Post Ride</button>
+                <button type="reset" class="secondary-btn">Clear Filters</button>
+            </div>
+        </div>
+    </form>
+</div>
+</body>
+</html>

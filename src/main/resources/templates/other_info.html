@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <title>Title</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #fef9f5;
+      color: #333;
+      animation: fadeIn 1s ease-in;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .info-container {
+      max-width: 900px;
+      margin: 40px auto;
+      padding: 40px 30px;
+      background-color: #ffffff;
+      border-radius: 12px;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+    }
+
+    h1 {
+      font-size: 2.6rem;
+      color: #17403f;
+      text-align: center;
+      margin-bottom: 30px;
+    }
+
+    h2 {
+      color: #2c7373;
+      margin-top: 40px;
+    }
+
+    p {
+      line-height: 1.8;
+      font-size: 1.05rem;
+      margin: 12px 0;
+    }
+
+    a {
+      color: #2c7373;
+      text-decoration: none;
+      font-weight: 600;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+
+    .images {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      margin: 30px 0;
+    }
+
+    .images img {
+      width: 150px;
+      height: auto;
+      border-radius: 12px;
+      transition: transform 0.3s ease;
+    }
+
+    .images img:hover {
+      transform: scale(1.05);
+    }
+
+    .back-link {
+      text-align: center;
+      margin-top: 40px;
+    }
+
+  </style>
+</head>
+
+<body>
+<div class="info-container">
+  <h1>About CampusCommute</h1>
+
+  <!-- Cartoon Student Images -->
+  <div class="images">
+    <img src="https://cdn-icons-png.flaticon.com/512/201/201818.png" alt="Student boy cartoon" />
+    <img src="https://cdn-icons-png.flaticon.com/512/201/201634.png" alt="Student girl cartoon" />
+  </div>
+
+  <p>
+    <strong>CampusCommute</strong> is your smart travel companion, designed specifically for students to share rides between campus and their hometowns. We aim to make travel more affordable, safer, and more social by connecting students who are heading in the same direction.
+  </p>
+
+  <h2>How It Helps You</h2>
+  <p>✅ Share rides with fellow students heading home for holidays.</p>
+  <p>✅ Split fuel costs fairly and transparently.</p>
+  <p>✅ Build new friendships on your way home!</p>
+  <p>✅ Verified students only — travel with trust.</p>
+
+  <h2>Is It Safe?</h2>
+  <p>
+    Yes! We use college email verification and optional student ID checks to ensure all users belong to the campus community. You’ll only be matched with real students.
+  </p>
+
+  <h2>Get Involved</h2>
+  <p>
+    Whether you're a student looking to save money, reduce your carbon footprint, or simply travel with company — CampusCommute is built for you.
+  </p>
+
+  <div class="back-link">
+    <a href="Home">← Return to CampusCommute Home</a>
+  </div>
+</div>
+</body>
+</html>

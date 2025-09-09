@@ -1,0 +1,145 @@
+.modal {
+      display:flex;
+      position: fixed;
+      z-index: 9999; /* Ensure modals are on top */
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      backdrop-filter: blur(8px);
+      background-color: rgba(0, 0, 0, 0.5);
+      justify-content: center;
+      align-items: center;
+      overflow-y: visible; /* Enable scrolling for long forms */
+      padding:20px;
+    }
+
+    .modal-content {
+      background-color: #fff9f5; /* Kept modal background color same */
+      padding: 30px;
+      border-radius: 16px;
+      max-width: 500px;
+      width: 100%;
+      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
+      animation: scaleUp 0.3s ease-in-out;
+      position: relative; /* For close button positioning */
+      overflow-y: visible;
+    }
+
+
+
+    .modal-content h2{
+      margin-bottom: 1.5rem;
+      color: #2e4747; /* Kept modal heading color same */
+      text-align: center;
+    }
+
+    .modal-content h2 span {
+      color: #f57c51; /* Kept modal heading span color same */
+    }
+
+    .modal-content label {
+      display: block;
+      margin-top: 1rem;
+      font-weight: 500;
+      color: #333; /* Modal label color */
+    }
+
+    .modal-content input {
+      width: 100%;
+      padding: 0.8rem;
+      margin-top: 0.5rem;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      background-color: #fdf6f2; /* Modal input background */
+      color: #333; /* Modal input text color */
+    }
+
+    .login-btn {
+      margin-top: 1.5rem;
+      width: 100%;
+      padding: 0.9rem;
+      background-color: #fcb489; /* Kept login button background color same */
+      color: #432818; /* Kept login button text color same */
+      border: none;
+      font-weight: bold;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: background 0.3s ease, transform 0.2s;
+    }
+
+    .login-btn:hover {
+      background-color: #f57c51; /* Kept login button hover background color same */
+      color: white; /* Kept login button hover text color same */
+      transform: translateY(-2px);
+    }
+
+    .modal-content {
+            margin: 20px; /* Adjust margin for modals on smaller screens */
+          }
+
+    .register-link {
+      margin-top: 1rem;
+      text-align: center;
+      font-size: 0.9rem;
+      color: #333; /* Register link text color */
+    }
+
+    .register-link a {
+      color: #f57c51; /* Kept register link color same */
+      text-decoration: none;
+      transition: color 0.3s ease;
+    }
+
+    .register-link a:hover {
+      color: #e26439; /* Darker orange on hover */
+    }
+
+
+    /* Message Modal (for custom alerts) */
+    #messageModal .modal-content {
+      max-width: 350px;
+      text-align: center;
+    }
+
+    #messageModal h2 {
+      font-size: 1.8rem;
+      margin-bottom: 1rem;
+    }
+
+    #messageModal p {
+      font-size: 1rem;
+      margin-bottom: 1.5rem;
+      color: #555;
+    }
+
+    #messageModal button {
+      background-color: #f57c51;
+      color: white;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: bold;
+      transition: background-color 0.3s ease, transform 0.2s;
+    }
+
+    #messageModal button:hover {
+      background-color: #e26439;
+      transform: translateY(-2px);
+    }
+
+        .close {
+          position: absolute;
+          top: 1rem;
+          right: 1rem;
+          font-size: 1.5rem;
+          color: #999;
+          cursor: pointer;
+          transition: color 0.3s ease;
+        }
+
+        .close:hover {
+          color: #666;
+        }
+

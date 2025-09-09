@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <link rel="stylesheet" th:href="@{/css/Home.css}"></link>
+  <title>FAQs - KnitWayzz</title>
+  <style>
+    .slide-up {
+      opacity: 0;
+      transform: translateY(40px);
+      animation: slideUp 0.8s ease-out forwards;
+    }
+
+    @keyframes slideUp {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+  </style>
+</head>
+<body>
+<header class="navbar">
+  <div class="logo">Knit<span>Wayzz</span></div>
+</header>
+
+<section class="why slide-up">
+  <h2>Frequently Asked Questions</h2>
+  <div class="features-grid">
+    <div class="feature-card">
+      <h3>How do I post a ride?</h3>
+      <p>Login and click on 'Post a Ride' to add your travel details.</p>
+    </div>
+    <div class="feature-card">
+      <h3>Is this app free?</h3>
+      <p>Yes! KnitWayzz is completely free for students.</p>
+    </div>
+    <div class="feature-card">
+      <h3>Is my data safe?</h3>
+      <p>Yes, we ensure your data is encrypted and only visible to verified students.</p>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <p style="text-align:center;">&copy; 2025 Knit<span>Wayzz</span> | FAQs</p>
+</footer>
+</body>
+</html>

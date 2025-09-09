@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <link rel="stylesheet" th:href="@{/css/Home.css}"></link>
+    <title>Title</title>
+
+    <style>
+        .slide-up {
+          opacity: 0;
+          transform: translateY(40px);
+          animation: slideUp 0.8s ease-out forwards;
+        }
+
+        @keyframes slideUp {
+          to {
+            opacity: 1;
+            transform: translateY(0);
+          }
+        }
+    </style>
+</head>
+<body>
+<header class="navbar">
+    <div class="logo">Knit<span>Wayzz</span></div>
+</header>
+
+<section class="why slide-up">
+    <h2>Support</h2>
+    <p style="text-align:center; max-width:600px; margin:auto;">
+        Need help? Email us at <strong>support@knitwayzz.in</strong> or call us at <strong>+91-9876543210</strong>.
+    </p>
+</section>
+
+<footer>
+    <p style="text-align:center;">&copy; 2025 Knit<span>Wayzz</span> | Support</p>
+</footer>
+</body>
+</html>
