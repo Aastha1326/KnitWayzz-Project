@@ -6,8 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.util.Comparator;
 import java.util.Locale;
-
-
 import java.util.List;
 import java.util.Optional;
 
@@ -24,15 +22,21 @@ public class FindRideService {
 
     // Fetch all rides joined by a user
     public List<FindRide> getJoinedRides(String username) {
-        return findRideRepository.findByJoinedBy(username);
+        return findRideRepository.findByJoinedByContaining(username);
+    }
+
+    public List<FindRide> getAllRidesExcludingMine(String username) {
+        return findRideRepository.findAllExcludingMyRidesAndJoined(username);
     }
 
     // Save a new ride (post or join)
     public FindRide saveRide(FindRide ride) {
+        if (ride.getSeatsAvailable() == null) {
+            ride.setSeatsAvailable(ride.getPassengers());
+        }
         return findRideRepository.save(ride);
     }
 
-    // Find ride by ID
     public Optional<FindRide> findById(Long id) {
         return findRideRepository.findById(id);
     }
@@ -44,7 +48,7 @@ public class FindRideService {
 
     // Joined rides of a user filtered by status
     public List<FindRide> getJoinedRidesByStatus(String username, String status) {
-        return findRideRepository.findByJoinedByAndStatus(username, status);
+        return findRideRepository.findByJoinedByContainingAndStatus(username, status);
     }
 
     // Delete a ride
@@ -57,16 +61,16 @@ public class FindRideService {
         return findRideRepository.findById(id).orElse(null);
     }
 
-    // ✅ All available rides (anyone’s rides that are not yet joined)
+    // All available rides (anyone’s rides that are not yet joined)
     public List<FindRide> getAllUnjoinedRides() {
         return findRideRepository.findAllUnjoined();
     }
     public List<FindRide> getAllUnjoinedRidesExceptMine(String username) {
-        return findRideRepository.findAllUnjoinedExceptMine(username);
+        return findRideRepository.findAllExcludingMyRidesAndJoined(username);
     }
 
 
-    // ✅ Only current user’s rides that are still unjoined
+    //  Only current user’s rides that are still unjoined
     public List<FindRide> getUnjoinedPostedRides(String username) {
         return findRideRepository.findPostedUnjoined(username);
     }
@@ -74,10 +78,10 @@ public class FindRideService {
     // Cancel joined ride
     public void cancelJoinedRide(Long rideId, String username) {
         FindRide ride = getRideById(rideId);
-        if (ride != null && username.equals(ride.getJoinedBy())) {
-            ride.setJoinedBy(null);
-            ride.setStatus("posted");
-            saveRide(ride);
+        if (ride != null && ride.getJoinedBy() != null && ride.getJoinedBy().contains(username)) {
+            ride.setJoinedBy(ride.getJoinedBy().replace(username, "").replace(",,", ","));
+            ride.setSeatsAvailable(ride.getSeatsAvailable() + 1);
+            findRideRepository.save(ride);
         }
     }
 
@@ -110,7 +114,7 @@ public class FindRideService {
                     // Negate because we want higher scores first
                     return -score;
                 })
-                // optional: break ties by date/time if you want
+                //break ties by date/time if you want
                 .thenComparing(FindRide::getDate, Comparator.nullsLast(Comparator.naturalOrder()));
 
         return rides.stream().sorted(cmp).toList();

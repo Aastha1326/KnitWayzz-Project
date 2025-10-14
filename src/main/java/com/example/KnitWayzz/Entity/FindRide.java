@@ -12,7 +12,7 @@ public class FindRide {
 
     private String source;
     private String destination;
-    private String date;          // Format: yyyy-MM-dd (can switch to LocalDate if needed)
+    private String date;          // Format: yyyy-MM-dd
     private int passengers = 1;
     private String timeFrom;
     private String timeTo;
@@ -24,7 +24,7 @@ public class FindRide {
     public String getMobileNo() { return mobileNo; }
     public void setMobileNo(String mobileNo) { this.mobileNo = mobileNo; }
 
-    private Integer seatsAvailable;
+    private Integer seatsAvailable=1;
 
     private String vehicle;
 
@@ -43,9 +43,9 @@ public class FindRide {
         this.seatsAvailable = seatsAvailable;
     }
 
-    private String postedBy;      // Username/email of poster
-    private String joinedBy;      // Username/email of joiner
-    private String status;        // "posted", "joined", "completed", etc.
+    private String postedBy;
+    private String joinedBy;
+    private String status;
 
     public FindRide() {}
 

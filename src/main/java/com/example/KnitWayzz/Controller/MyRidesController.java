@@ -36,7 +36,15 @@ public class MyRidesController {
 
     @PostMapping("/myrides_cancel/{id}")
     public String myCancelJoinedRide(@PathVariable Long id, Principal principal) {
-        findRideService.cancelJoinedRide(id, principal.getName()); // Implement logic in service
+        findRideService.cancelJoinedRide(id, principal.getName());
+        return "redirect:/my_rides";
+    }
+    @PostMapping("/delete_ride/{id}")
+    public String deletePostedRide(@PathVariable Long id, Principal principal) {
+        FindRide ride = findRideService.getRideById(id);
+        if (ride != null && ride.getPostedBy().equals(principal.getName())) {
+            findRideService.deleteRide(id);
+        }
         return "redirect:/my_rides";
     }
 

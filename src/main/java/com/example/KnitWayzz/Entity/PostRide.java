@@ -1,6 +1,7 @@
 package com.example.KnitWayzz.Entity;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.*;
 
 @Table(name="postride")
 @Entity
@@ -9,16 +10,21 @@ public class PostRide {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    @NotBlank(message = "Username is required")
     private String username;
+
 
     public String getUsername() {
         return username;
     }
 
+
     public void setUsername(String username) {
         this.username = username;
     }
 
+    @Pattern(regexp = "^[0-9]{10}$", message = "Mobile number must be 10 digits")
     private String mobileNo;
 
     public String getMobileNo() {
@@ -27,6 +33,8 @@ public class PostRide {
     public void setMobileNo(String mobileNo) {
         this.mobileNo = mobileNo;
     }
+
+    @NotBlank(message = "Vehicle details are required")
     private String vehicle;
 
     public String getVehicle() {
@@ -37,13 +45,28 @@ public class PostRide {
     }
 
 
+    @NotBlank(message = "Source is required")
     private String source;
+
+    @NotBlank(message = "Destination is required")
     private String destination;
+
+    @NotBlank(message = "Date is required")
     private String date;
+
+    @Min(value = 1, message = "Minimum 1 passenger required")
+    @Max(value = 6, message = "Maximum 6 passengers allowed")
     private int passengers = 1;
+
+    @NotBlank(message = "Start time is required")
     private String timeFrom;
+
+
+    @NotBlank(message = "End time is required")
     private String timeTo;
     private String notes;
+
+    @Positive(message = "Contribution amount must be positive")
     private Integer maxContribution;
 
     // Constructors

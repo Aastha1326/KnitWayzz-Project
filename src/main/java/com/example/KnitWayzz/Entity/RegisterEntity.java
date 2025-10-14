@@ -1,10 +1,7 @@
 package com.example.KnitWayzz.Entity;
 
 import jakarta.persistence.*;
-import jakarta.validation.constraints.Email;
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.Pattern;
-import jakarta.validation.constraints.Size;
+import jakarta.validation.constraints.*;
 
 @Entity
 @Table(name = "register")
@@ -15,7 +12,7 @@ public class RegisterEntity {
 
     @Email(message = "Enter a valid email")
     @NotBlank
-    @Column(name = "email") // Matches your physical column
+    @Column(name = "email")
     private String email;
 
     @NotBlank(message = "Name is required")
@@ -43,14 +40,6 @@ public class RegisterEntity {
     @Column(name = "reg_confirmPassword")
     private String regConfirmPassword;
 
-    public String getRegConfirmPassword() {
-        return regConfirmPassword;
-    }
-
-    public void setRegConfirmPassword(String regConfirmPassword) {
-        this.regConfirmPassword = regConfirmPassword;
-    }
-
     // Getters and Setters
     public Long getId() { return id; }
     public void setId(Long id) { this.id = id; }
@@ -73,6 +62,13 @@ public class RegisterEntity {
     public String getRegPassword() { return regPassword; }
     public void setRegPassword(String regPassword) { this.regPassword = regPassword; }
 
+    public String getRegConfirmPassword() {
+        return regConfirmPassword;
+    }
+
+    public void setRegConfirmPassword(String regConfirmPassword) {
+        this.regConfirmPassword = regConfirmPassword;
+    }
 
 }
 
