@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import java.security.Principal;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -95,8 +96,6 @@ public class FindRideController {
     }
 
 
-
-
     // Display the My Rides page for the current user
     @GetMapping("/find_ride")
     public String showMyRides(Model model, Principal principal,
@@ -111,6 +110,12 @@ public class FindRideController {
         // Get all rides except user's own rides and already joined rides
         List<FindRide> postedRides = findRideService.getAllRidesExcludingMine(username);
 
+        // Filter out past rides
+        LocalDate today = LocalDate.now();
+        postedRides = postedRides.stream()
+                .filter(ride -> !ride.getDate().isBefore(today))
+                .toList();
+
         // Optional: search by source/destination
         postedRides = findRideService.searchAndPrioritize(postedRides, source, destination);
 
@@ -119,11 +124,10 @@ public class FindRideController {
 
         model.addAttribute("postedRides", postedRides);
         model.addAttribute("joinedRides", joinedRides);
-
         model.addAttribute("sourceQuery", source);
         model.addAttribute("destinationQuery", destination);
 
         return "find_ride";
     }
-
 }
+

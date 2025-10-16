@@ -1,6 +1,9 @@
 package com.example.KnitWayzz.Entity;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
+
+import java.time.LocalDate;
 
 @Entity
 @Table(name="findride")
@@ -12,37 +15,18 @@ public class FindRide {
 
     private String source;
     private String destination;
-    private String date;          // Format: yyyy-MM-dd
+
+    @NotNull
+    private LocalDate date;          // Format: yyyy-MM-dd
+
     private int passengers = 1;
     private String timeFrom;
     private String timeTo;
     private String notes;
     private Integer maxContribution;
-
     private String mobileNo;
-
-    public String getMobileNo() { return mobileNo; }
-    public void setMobileNo(String mobileNo) { this.mobileNo = mobileNo; }
-
-    private Integer seatsAvailable=1;
-
+    private Integer seatsAvailable = 1;
     private String vehicle;
-
-    public String getVehicle() {
-        return vehicle;
-    }
-    public void setVehicle(String vehicle) {
-        this.vehicle = vehicle;
-    }
-
-
-    public Integer getSeatsAvailable() {
-        return seatsAvailable;
-    }
-    public void setSeatsAvailable(Integer seatsAvailable) {
-        this.seatsAvailable = seatsAvailable;
-    }
-
     private String postedBy;
     private String joinedBy;
     private String status;
@@ -59,8 +43,8 @@ public class FindRide {
     public String getDestination() { return destination; }
     public void setDestination(String destination) { this.destination = destination; }
 
-    public String getDate() { return date; }
-    public void setDate(String date) { this.date = date; }
+    public LocalDate getDate() { return date; }
+    public void setDate(LocalDate date) { this.date = date; }  // ✅ Corrected
 
     public int getPassengers() { return passengers; }
     public void setPassengers(int passengers) { this.passengers = passengers; }
@@ -77,6 +61,15 @@ public class FindRide {
     public Integer getMaxContribution() { return maxContribution; }
     public void setMaxContribution(Integer maxContribution) { this.maxContribution = maxContribution; }
 
+    public String getMobileNo() { return mobileNo; }
+    public void setMobileNo(String mobileNo) { this.mobileNo = mobileNo; }
+
+    public Integer getSeatsAvailable() { return seatsAvailable; }
+    public void setSeatsAvailable(Integer seatsAvailable) { this.seatsAvailable = seatsAvailable; }
+
+    public String getVehicle() { return vehicle; }
+    public void setVehicle(String vehicle) { this.vehicle = vehicle; }
+
     public String getPostedBy() { return postedBy; }
     public void setPostedBy(String postedBy) { this.postedBy = postedBy; }
 
@@ -86,4 +79,3 @@ public class FindRide {
     public String getStatus() { return status; }
     public void setStatus(String status) { this.status = status; }
 }
-

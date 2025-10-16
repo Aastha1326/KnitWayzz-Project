@@ -2,13 +2,17 @@ package com.example.KnitWayzz.Controller;
 
 import com.example.KnitWayzz.Entity.FindRide;
 import com.example.KnitWayzz.Entity.PostRide;
-import com.example.KnitWayzz.Service.PostRideService;
 import com.example.KnitWayzz.Service.FindRideService;
+import com.example.KnitWayzz.Service.PostRideService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+
+import jakarta.validation.Valid;
 import java.security.Principal;
+import java.time.LocalDate;
 
 @Controller
 public class PostRideController {
@@ -28,15 +32,27 @@ public class PostRideController {
 
     // Save PostRide → also copy data into FindRide
     @PostMapping("/post_ride")
-    public String postRideAndRedirectToMyRides(@ModelAttribute("rideSearch") PostRide ride,
-                                               Principal principal) {
-        // Attach username from logged-in user
-        ride.setUsername(principal.getName());
+    public String postRideAndRedirectToMyRides(@Valid @ModelAttribute("rideSearch") PostRide ride,
+                                               BindingResult result,
+                                               Principal principal,
+                                               Model model) {
 
-        // 1. Save in PostRide table
+        // Attach username
+        ride.setUsername(principal!= null ? principal.getName(): "Guest");
+
+        // Validate date (prevent past dates)
+        if (ride.getDate().isBefore(LocalDate.now())) {
+            result.rejectValue("date", "error.rideSearch", "Date cannot be in the past");
+        }
+
+        if (result.hasErrors()) {
+            return "post_ride";
+        }
+
+        // Save PostRide
         PostRide savedRide = postRideService.saveRide(ride);
 
-        // 2. Map PostRide → FindRide
+        // Map PostRide → FindRide
         FindRide findRide = new FindRide();
         findRide.setMobileNo(savedRide.getMobileNo());
         findRide.setVehicle(savedRide.getVehicle());
@@ -48,16 +64,11 @@ public class PostRideController {
         findRide.setPassengers(savedRide.getPassengers());
         findRide.setMaxContribution(savedRide.getMaxContribution());
         findRide.setNotes(savedRide.getNotes());
-
-        // extra fields
         findRide.setPostedBy(principal.getName());
         findRide.setStatus("posted");
 
-        // 3. Save in FindRide table
         findRideService.saveRide(findRide);
 
-        // Redirect to MyRides or FindRide
-        return "redirect:/find_ride";  // or "redirect:/my_rides"
-
+        return "redirect:/find_ride";
     }
 }
