@@ -46,10 +46,12 @@ public class PostRideController {
         }
 
         if (result.hasErrors()) {
+            System.out.println(result.getAllErrors());
             return "post_ride";
         }
 
         // Save PostRide
+        System.out.println("Reached controller");
         PostRide savedRide = postRideService.saveRide(ride);
 
         // Map PostRide → FindRide
@@ -67,7 +69,9 @@ public class PostRideController {
         findRide.setPostedBy(principal.getName());
         findRide.setStatus("posted");
 
+        System.out.println("Saved PostRide ID: " + savedRide.getId());
         findRideService.saveRide(findRide);
+        System.out.println("Saved FindRide");
 
         return "redirect:/find_ride";
     }

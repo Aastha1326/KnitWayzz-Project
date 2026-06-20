@@ -13,7 +13,6 @@ public class PostRide {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @NotBlank(message = "Username is required")
     private String username;
 
     @Pattern(regexp = "^[0-9]{10}$", message = "Mobile number must be 10 digits")
